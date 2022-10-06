@@ -112,7 +112,7 @@ class Awesomecoder_Backend
 		// $this->icon = "data:image/svg+xml;base64,$icon";
 
 		$this->pages = [
-			"toplevel_page_plagiarism",
+			"toplevel_page_playstore",
 		];
 
 		$this->metabox = [
@@ -129,9 +129,9 @@ class Awesomecoder_Backend
 	 */
 	public function awesomecoder_admin_menu()
 	{
-		$icon = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBzdHlsZT0iZmlsbDojYTdhYWFkIj48cGF0aCBkPSJNOSA5aDZ2Nkg5eiI+PC9wYXRoPjxwYXRoIGQ9Ik0yMCA2YzAtMS4xMDMtLjg5Ny0yLTItMmgtMlYyaC0ydjJoLTRWMkg4djJINmMtMS4xMDMgMC0yIC44OTctMiAydjJIMnYyaDJ2NEgydjJoMnYyYzAgMS4xMDMuODk3IDIgMiAyaDJ2Mmgydi0yaDR2Mmgydi0yaDJjMS4xMDMgMCAyLS44OTcgMi0ydi0yaDJ2LTJoLTJ2LTRoMlY4aC0yVjZ6TTYgMThWNmgxMmwuMDAyIDEySDZ6Ij48L3BhdGg+PC9zdmc+";
-		add_menu_page(__("WP Plagiarism", "awesomecoder"), __("WP Plagiarism", "awesomecoder"), 'manage_options', 'plagiarism', array($this, 'menu_activator_callback'), $icon, 50);
-		add_submenu_page('plagiarism', __("Dashboard", "awesomecoder"), __("Dashboard", "awesomecoder"), 'manage_options', 'plagiarism', array($this, 'awesomecoder_dashboard_callback'));
+		$icon = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMyAyMyIgc3R5bGU9ImZpbGw6IzcyYWVlNiI+PHBhdGggZD0ibTEyLjk1NCAxMS42MTYgMi45NTctMi45NTdMNi4zNiAzLjI5MWMtLjYzMy0uMzQyLTEuMjI2LS4zOS0xLjc0Ni0uMDE2bDguMzQgOC4zNDF6bTMuNDYxIDMuNDYyIDMuMDc0LTEuNzI5Yy42LS4zMzYuOTI5LS44MTIuOTI5LTEuMzQgMC0uNTI3LS4zMjktMS4wMDQtLjkyOC0xLjM0bC0yLjc4My0xLjU2My0zLjEzMyAzLjEzMiAyLjg0MSAyLjg0ek00LjEgNC4wMDJjLS4wNjQuMTk3LS4xLjQxNy0uMS42NTh2MTQuNzA1YzAgLjM4MS4wODQuNzA5LjIzNi45N2w4LjA5Ny04LjA5OEw0LjEgNC4wMDJ6bTguODU0IDguODU1TDQuOTAyIDIwLjkxYy4xNTQuMDU5LjMyLjA5LjQ5NS4wOS4zMTIgMCAuNjM3LS4wOTIuOTY4LS4yNzZsOS4yNTUtNS4xOTctMi42NjYtMi42N3oiPjwvcGF0aD48L3N2Zz4=";
+		add_menu_page(__("Playstore", "awesomecoder"), __("Playstore", "awesomecoder"), 'manage_options', 'playstore', array($this, 'menu_activator_callback'), $icon, 50);
+		add_submenu_page('playstore', __("Dashboard", "awesomecoder"), __("Dashboard", "awesomecoder"), 'manage_options', 'playstore', array($this, 'awesomecoder_dashboard_callback'));
 	}
 
 	/**
