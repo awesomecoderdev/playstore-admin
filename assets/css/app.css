@@ -1,0 +1,13 @@
+#wpbody{
+    font-family: 'Poppins', sans-serif;
+}
+.notice {
+    display: none !important;
+}
+#wpcontent{
+   padding-left: 0 !important;
+}
+
+#wpwrap{
+    /* background: white !important; */
+}
