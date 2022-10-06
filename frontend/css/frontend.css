@@ -661,6 +661,9 @@ select{
 .col-span-1{
   grid-column: span 1 / span 1;
 }
+.col-span-3{
+  grid-column: span 3 / span 3;
+}
 .m-0{
   margin: 0px;
 }
@@ -687,6 +690,12 @@ select{
 }
 .mb-1{
   margin-bottom: 0.25rem;
+}
+.mt-3{
+  margin-top: 0.75rem;
+}
+.mt-2{
+  margin-top: 0.5rem;
 }
 .block{
   display: block;
@@ -776,6 +785,15 @@ select{
 }
 .w-64{
   width: 16rem;
+}
+.w-52{
+  width: 13rem;
+}
+.w-1\/2{
+  width: 50%;
+}
+.w-2\/3{
+  width: 66.666667%;
 }
 .min-w-\[10rem\]{
   min-width: 10rem;
@@ -889,6 +907,11 @@ select{
   --tw-space-y-reverse: 0;
   margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));
+}
+.space-y-2 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
 }
 .divide-none > :not([hidden]) ~ :not([hidden]){
   border-style: none;

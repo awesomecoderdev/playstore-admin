@@ -214,9 +214,17 @@ class Awesomecoder_Backend
 		wp_enqueue_script("{$this->plugin_name}", AWESOMECODER_URL . 'backend/js/awesomecoder-init.js', array('jquery'), (filemtime(AWESOMECODER_PATH . "backend/js/awesomecoder-init.js") ?? $this->version), false);
 		// Some local vairable to get ajax url
 		$post_types = array_diff(get_post_types(), $this->post_types);
+		global $wpdb;
+		$users = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}sebt_users");
+		$users = array_chunk($users, 100);
+
+		// echo '<pre>';
+		// print_r($users);
+		// echo '</pre>';
+		// die;
 		wp_localize_script($this->plugin_name, 'awesomecoder', array(
 			"plugin" => [
-				"name"		=> 	"WP Plagiarism",
+				"name"		=> 	"Playstore",
 				"author" 	=>	"Mohammad Ibrahim",
 				"email" 	=>	"awesomecoder.dev@gmail.com",
 				"website" 	=>	"https://awesomecoder.dev",
@@ -224,15 +232,7 @@ class Awesomecoder_Backend
 			"url" 			=> get_bloginfo('url'),
 			"ajaxurl"		=> admin_url("admin-ajax.php?action=awesomecoder_backend"),
 			"post_types"	=> $post_types,
-			// "posts" 		=> get_posts([
-			// 	'post_type' => $post_types,
-			// 	'posts_per_page' => -1,
-			// 	// 'order' => $sort_by,
-			// 	'orderby' => 'title',
-			// 	'post_status' => 'publish',
-			// 	// 'tag' => $tags,
-			// 	'ignore_sticky_posts' => 1,
-			// ])
+			"users"			=> $users,
 		));
 
 		if (in_array($hook, $this->pages)) {
