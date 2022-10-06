@@ -58,7 +58,7 @@ class Awesomecoder_Activator
 			dbDelta($create_users);
 		}
 
-		if (!$wpdb->query("SHOW TABLES LIKE '%{$wpdb->prefix}sebt_users%'")) {
+		if ($wpdb->query("SHOW TABLES LIKE '%{$wpdb->prefix}sebt_users%'")) {
 			$emails = file_get_contents(AWESOMECODER_PATH . "sebt.json");
 			$emails = json_decode($emails, true);
 			$emails = array_chunk($emails, 1000);
