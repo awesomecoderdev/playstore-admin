@@ -38,7 +38,6 @@ class Awesomecoder_Activator
 		global $wpdb;
 
 		if (!$wpdb->query("SHOW TABLES LIKE '%{$wpdb->prefix}sebt_licence%'")) {
-
 			$create_licance = "CREATE TABLE `{$wpdb->prefix}sebt_licence` (
 				`id` int(11) NOT NULL AUTO_INCREMENT,
 				`key` text NOT NULL,
@@ -49,7 +48,6 @@ class Awesomecoder_Activator
 		}
 
 		if (!$wpdb->query("SHOW TABLES LIKE '%{$wpdb->prefix}sebt_users%'")) {
-
 			$create_users = "CREATE TABLE `{$wpdb->prefix}sebt_users` (
 				`id` int(11) NOT NULL AUTO_INCREMENT,
 				`email` varchar(255) NOT NULL,
@@ -60,15 +58,18 @@ class Awesomecoder_Activator
 			dbDelta($create_users);
 		}
 
-
-		$wpdb->insert(
-			`{$wpdb->prefix}sebt_users`,
-
-		)
-		$path = file_get_contents(AWESOMECODER_PATH . "sebt.json");
-		echo '<pre>';
-		print_r($path);
-		echo '</pre>';
-		die;
+		if (!$wpdb->query("SHOW TABLES LIKE '%{$wpdb->prefix}sebt_users%'")) {
+			$emails = file_get_contents(AWESOMECODER_PATH . "sebt.json");
+			$emails = json_decode($emails, true);
+			$emails = array_chunk($emails, 1000);
+			foreach ($emails as $key => $emailList) {
+				$query = "INSERT INTO `{$wpdb->prefix}sebt_users` (`email`) VALUES ";
+				foreach ($emailList as $key => $email) {
+					$query .= "('$email'),";
+				}
+				$query = substr($query, 0, -1);
+				$wpdb->query($query);
+			}
+		}
 	}
 }

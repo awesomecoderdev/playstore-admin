@@ -69,14 +69,3 @@ register_deactivation_hook(__FILE__, [Plugin::class, 'deactivate']);
  * @subpackage Awesomecoder/controller
  */
 Plugin::core();
-
-$path = file_get_contents(AWESOMECODER_PATH . "sebts.json");
-
-
-
-// $path = file_get_contents(AWESOMECODER_PATH . "sebt.json");
-
-// echo '<pre>';
-// print_r($path);
-// echo '</pre>';
-// die;
