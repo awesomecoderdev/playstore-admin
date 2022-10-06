@@ -32,7 +32,7 @@
  *
  */
 
-use AwesomeCoder\Plugin\Plagiarism\Core\Plugin;
+use AwesomeCoder\Plugin\Playstore\Admin\Core\Plugin;
 
 // If this file is called directly, abort.
 !defined('WPINC') ? die : include("plugin.php");

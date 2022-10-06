@@ -1,13 +1,13 @@
 <?php
 
-namespace AwesomeCoder\Plugin\Plagiarism\Core;
+namespace AwesomeCoder\Plugin\Playstore\Admin\Core;
 
-use AwesomeCoder\Plugin\Plagiarism\Controller\Awesomecoder;
-use AwesomeCoder\Plugin\Plagiarism\Controller\Awesomecoder_Activator;
-use AwesomeCoder\Plugin\Plagiarism\Controller\Awesomecoder_Deactivator;
-use AwesomeCoder\Plugin\Plagiarism\Controller\Awesomecoder_Handler;
-use AwesomeCoder\Plugin\Plagiarism\Controller\Awesomecoder_MetaBox;
-use AwesomeCoder\Plugin\Plagiarism\Controller\Awesomecoder_Shortcode;
+use AwesomeCoder\Plugin\Playstore\Admin\Controller\Awesomecoder;
+use AwesomeCoder\Plugin\Playstore\Admin\Controller\Awesomecoder_Activator;
+use AwesomeCoder\Plugin\Playstore\Admin\Controller\Awesomecoder_Deactivator;
+use AwesomeCoder\Plugin\Playstore\Admin\Controller\Awesomecoder_Handler;
+use AwesomeCoder\Plugin\Playstore\Admin\Controller\Awesomecoder_MetaBox;
+use AwesomeCoder\Plugin\Playstore\Admin\Controller\Awesomecoder_Shortcode;
 
 /**
  * Load core of the plugin.

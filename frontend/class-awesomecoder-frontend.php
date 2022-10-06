@@ -1,6 +1,6 @@
 <?php
 
-namespace AwesomeCoder\Plugin\Plagiarism\Frontend;
+namespace AwesomeCoder\Plugin\Playstore\Admin\Frontend;
 
 /**
  * The core plugin class.

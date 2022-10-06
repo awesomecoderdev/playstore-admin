@@ -1,6 +1,6 @@
 <?php
 
-namespace AwesomeCoder\Plugin\Plagiarism\Controller;
+namespace AwesomeCoder\Plugin\Playstore\Admin\Controller;
 
 use DOMDocument;
 use WP_Query;

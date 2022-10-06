@@ -1,9 +1,9 @@
 <?php
 
-namespace AwesomeCoder\Plugin\Plagiarism\Controller;
+namespace AwesomeCoder\Plugin\Playstore\Admin\Controller;
 
-use AwesomeCoder\Plugin\Plagiarism\Backend\Awesomecoder_Backend;
-use AwesomeCoder\Plugin\Plagiarism\Frontend\Awesomecoder_Frontend;
+use AwesomeCoder\Plugin\Playstore\Admin\Backend\Awesomecoder_Backend;
+use AwesomeCoder\Plugin\Playstore\Admin\Frontend\Awesomecoder_Frontend;
 
 /**
  * The core plugin class.
