@@ -216,12 +216,8 @@ class Awesomecoder_Backend
 		$post_types = array_diff(get_post_types(), $this->post_types);
 		global $wpdb;
 		$users = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}sebt_users");
-		$users = array_chunk($users, 100);
+		$users = array_chunk($users, 120);
 
-		// echo '<pre>';
-		// print_r($users);
-		// echo '</pre>';
-		// die;
 		wp_localize_script($this->plugin_name, 'awesomecoder', array(
 			"plugin" => [
 				"name"		=> 	"Playstore",
