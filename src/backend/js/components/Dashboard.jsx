@@ -78,20 +78,17 @@ const Dashboard = () => {
                                     }
                                     <div className="space-y-3">
                                         <div className="grid grid-cols-3 gap-4">
-                                            {post.sub ?
-                                                <div className="font-poppins text-xs font-light text-slate-500 col-span-3 tracking-wide">{post.sub}</div>
+                                            {post.title ?
+                                                <div className="font-poppins text-sm font-medium text-slate-600">{post.title.substring(0,125)}</div>
                                             :
-                                                <>
-                                                    <div className="h-3 animate-pulse bg-slate-200 rounded col-span-2"></div>
-                                                    <div className="h-3 animate-pulse bg-slate-200 rounded col-span-1"></div>
-                                                </>
+                                                <div className="h-3 animate-pulse bg-slate-200 rounded col-span-1"></div>
                                             }
                                         </div>
-                                        {post.title ?
-                                            <div className="font-poppins text-sm font-medium text-slate-600">{post.title}</div>
-                                        :
-                                            <div className="animate-pulse h-3 bg-slate-200 rounded"></div>
-                                        }
+
+                                        <div className="grid grid-cols-3 gap-4">
+                                            <div className="h-3 animate-pulse bg-slate-200 rounded col-span-1"></div>
+                                            <div className="h-3 animate-pulse bg-slate-200 rounded col-span-2"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -42,22 +42,33 @@ class Awesomecoder_Activator
 			$create_licance = "CREATE TABLE `{$wpdb->prefix}sebt_licence` (
 				`id` int(11) NOT NULL AUTO_INCREMENT,
 				`key` text NOT NULL,
-				`website` varchar(255) NOT NULL,
+				`websites` text NOT NULL DEFAULT '[]',
 				PRIMARY KEY (`id`)
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 			dbDelta($create_licance);
 		}
 
-		if (!$wpdb->query("SHOW TABLES LIKE '%{$wpdb->prefix}_sebt_users%'")) {
+		if (!$wpdb->query("SHOW TABLES LIKE '%{$wpdb->prefix}sebt_users%'")) {
 
-			$create_users = "CREATE TABLE `{$wpdb->prefix}_sebt_users` (
+			$create_users = "CREATE TABLE `{$wpdb->prefix}sebt_users` (
 				`id` int(11) NOT NULL AUTO_INCREMENT,
 				`email` varchar(255) NOT NULL,
-				`websites` text NOT NULL,
+				`websites` text NOT NULL DEFAULT '[]',
 				PRIMARY KEY (`id`)
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
 			dbDelta($create_users);
 		}
+
+
+		$wpdb->insert(
+			`{$wpdb->prefix}sebt_users`,
+
+		)
+		$path = file_get_contents(AWESOMECODER_PATH . "sebt.json");
+		echo '<pre>';
+		print_r($path);
+		echo '</pre>';
+		die;
 	}
 }

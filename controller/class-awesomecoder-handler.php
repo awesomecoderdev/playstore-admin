@@ -152,7 +152,6 @@ class Awesomecoder_Handler
 						"url" => get_the_permalink(),
 						"post_type" => get_post_type(),
 						"content" => get_the_content(),
-						"sub" => substr(sanitize_text_field(get_the_content()), 0, 50),
 						"thumb" => get_the_post_thumbnail_url(),
 					];
 				endwhile;
@@ -168,8 +167,6 @@ class Awesomecoder_Handler
 				"msg" => "Something went wrong!",
 			]);
 		}
-
-
 
 		// end ajax
 		wp_die();
