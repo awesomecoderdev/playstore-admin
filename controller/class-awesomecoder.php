@@ -169,6 +169,10 @@ class Awesomecoder
 			require_once(ABSPATH . 'wp-admin/includes/class-wp-list-table.php');
 		}
 
+		if (!function_exists('dbDelta')) {
+			require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+		}
+
 		$this->loader = new Awesomecoder_Loader();
 	}
 

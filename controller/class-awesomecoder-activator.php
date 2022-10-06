@@ -35,37 +35,29 @@ class Awesomecoder_Activator
 	 */
 	public static function activate()
 	{
-		self::create_tables();
-	}
-
-	/**
-	 * Create necessary database tables
-	 *
-	 * @return void
-	 */
-	public static function create_tables()
-	{
 		global $wpdb;
 
-		$create_licance = "CREATE TABLE `{$wpdb->prefix}sebt_licence` (
-			`id` int(11) NOT NULL AUTO_INCREMENT,
-			`key` text NOT NULL,
-			`website` varchar(255) NOT NULL,
-			PRIMARY KEY (`id`)
-		) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+		if (!$wpdb->query("SHOW TABLES LIKE '%{$wpdb->prefix}sebt_licence%'")) {
 
-		$create_users = "CREATE TABLE `{$wpdb->prefix}_sebt_users` (
-			`id` int(11) NOT NULL AUTO_INCREMENT,
-			`email` varchar(255) NOT NULL,
-			`websites` text NOT NULL,
-			PRIMARY KEY (`id`)
-		) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
-
-		if (!function_exists('dbDelta')) {
-			require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+			$create_licance = "CREATE TABLE `{$wpdb->prefix}sebt_licence` (
+				`id` int(11) NOT NULL AUTO_INCREMENT,
+				`key` text NOT NULL,
+				`website` varchar(255) NOT NULL,
+				PRIMARY KEY (`id`)
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+			dbDelta($create_licance);
 		}
 
-		dbDelta($create_licance);
-		dbDelta($create_users);
+		if (!$wpdb->query("SHOW TABLES LIKE '%{$wpdb->prefix}_sebt_users%'")) {
+
+			$create_users = "CREATE TABLE `{$wpdb->prefix}_sebt_users` (
+				`id` int(11) NOT NULL AUTO_INCREMENT,
+				`email` varchar(255) NOT NULL,
+				`websites` text NOT NULL,
+				PRIMARY KEY (`id`)
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+			dbDelta($create_users);
+		}
 	}
 }
