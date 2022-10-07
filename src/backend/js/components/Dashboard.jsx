@@ -13,15 +13,15 @@ const Dashboard = () => {
     const [tab, setTab] = useState(true);
 
     const getDomain = (href) => {
-        if(href){
-            const url = href.match(/^(https?\:)\/\/(([^:\/?#]*)(?:\:([0-9]+))?)([\/]{0,1}[^?#]*)(\?[^#]*|)(#.*|)$/);
-            return ( url && url[2] && url[2] != null) ? url[2] : false;
-        }else{
-            return false;
-        }
+      if(href){
+          const url = href.match(/^(https?\:)\/\/(([^:\/?#]*)(?:\:([0-9]+))?)([\/]{0,1}[^?#]*)(\?[^#]*|)(#.*|)$/);
+          return ( url && url[2] && url[2] != null) ? url[2] : false;
+      }else{
+          return false;
+      }
     }
 
-    function copyToClipboard(e) {
+    const copyToClipboard = (e) => {
       const license = e.target.getAttribute("data-license")
       const id = e.target.getAttribute("data-id")
       if((license != null || license != "") && navigator){
@@ -35,10 +35,6 @@ const Dashboard = () => {
         }, 1000);
       }
     };
-
-    console.log('====================================');
-    console.log(licenses);
-    console.log('====================================');
 
     return (
         <>
@@ -215,8 +211,10 @@ const Dashboard = () => {
                                                   {
                                                     navigator &&
                                                     <Fragment>
-                                                      <ClipboardDocumentCheckIcon id={`license_${licensePaged}_${license.id}`} className='opacity-0 h-5 w-5 text-green-400 transition-all duration-150 scale-105 absolute right-4' />
-                                                      <ClipboardDocumentIcon className='h-5 w-5 transition-all duration-150 absolute right-4' data-id={`license_${licensePaged}_${license.id}`} data-license={license.key} onClick={(e) => copyToClipboard(e)} />
+                                                      <ClipboardDocumentCheckIcon id={`license_${licensePaged}_${license.id}`} className='opacity-0 h-5 w-5 block text-green-400 transition-all duration-150 scale-105 absolute right-4' />
+                                                      <span className='transition-all duration-150 absolute right-4 block' data-id={`license_${licensePaged}_${license.id}`} data-license={license.key} onClick={(e) => copyToClipboard(e)} >
+                                                        <ClipboardDocumentIcon className='h-5 w-5 pointer-events-none' />
+                                                      </span>
                                                     </Fragment>
                                                   }
                                                 </Fragment>

@@ -2689,7 +2689,7 @@ var Dashboard = function Dashboard() {
     }
   };
 
-  function copyToClipboard(e) {
+  var copyToClipboard = function copyToClipboard(e) {
     var license = e.target.getAttribute("data-license");
     var id = e.target.getAttribute("data-id");
 
@@ -2702,12 +2702,8 @@ var Dashboard = function Dashboard() {
         document.getElementById("".concat(id)).classList.add("opacity-0");
       }, 1000);
     }
-  }
+  };
 
-  ;
-  console.log('====================================');
-  console.log(_Backend__WEBPACK_IMPORTED_MODULE_1__.licenses);
-  console.log('====================================');
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
       className: "relative bg-white w-full flex items-center md:justify-between justify-start md:flex-row flex-col px-5 py-3",
@@ -2889,14 +2885,17 @@ var Dashboard = function Dashboard() {
                       }), navigator && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
                         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_heroicons_react_24_outline__WEBPACK_IMPORTED_MODULE_11__["default"], {
                           id: "license_".concat(licensePaged, "_").concat(license.id),
-                          className: "opacity-0 h-5 w-5 text-green-400 transition-all duration-150 scale-105 absolute right-4"
-                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_heroicons_react_24_outline__WEBPACK_IMPORTED_MODULE_12__["default"], {
-                          className: "h-5 w-5 transition-all duration-150 absolute right-4",
+                          className: "opacity-0 h-5 w-5 block text-green-400 transition-all duration-150 scale-105 absolute right-4"
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+                          className: "transition-all duration-150 absolute right-4 block",
                           "data-id": "license_".concat(licensePaged, "_").concat(license.id),
                           "data-license": license.key,
                           onClick: function onClick(e) {
                             return copyToClipboard(e);
-                          }
+                          },
+                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_heroicons_react_24_outline__WEBPACK_IMPORTED_MODULE_12__["default"], {
+                            className: "h-5 w-5 pointer-events-none"
+                          })
                         })]
                       })]
                     }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
