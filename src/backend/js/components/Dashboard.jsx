@@ -45,7 +45,7 @@ const Dashboard = () => {
                       onClick={(e) => {
                         setTab(true)
                       }}
-                      className='mr-2 bg-white cursor-pointer flex items-center p-2 rounded-md border border-slate-400/25 transform translate-y-0 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 shadow-slate-200 '>
+                      className={`${tab && "opacity-70 pointer-events-none"} mr-2 bg-white cursor-pointer flex items-center p-2 rounded-md border border-slate-400/25 transform translate-y-0 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 shadow-slate-200`}>
                         <Squares2X2Icon className="h-5 pointer-events-none text-slate-500 mr-2"/>SEBT Users
                     </span>
                     {/* <span className='mr-2 bg-white cursor-pointer flex items-center p-2 rounded-md border border-slate-400/25 transform translate-y-0 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 shadow-slate-200 '>
@@ -58,7 +58,7 @@ const Dashboard = () => {
                       onClick={(e) => {
                         setTab(false)
                       }}
-                      className='mr-2 bg-white cursor-pointer flex items-center p-2 rounded-md border border-slate-400/25 transform translate-y-0 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 shadow-slate-200 '>
+                      className={`${!tab && "opacity-70 pointer-events-none"} mr-2 bg-white cursor-pointer flex items-center p-2 rounded-md border border-slate-400/25 transform translate-y-0 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 shadow-slate-200`}>
                         <KeyIcon className="h-5 pointer-events-none text-slate-500 mr-2"/>License
                     </span>
                 </div>
@@ -185,7 +185,7 @@ const Dashboard = () => {
                           <div key={license.id}  className="relative bg-white border border-slate-400/25 rounded-md p-3 w-full mx-auto cursor-pointer hover:shadow-lg transition-all duration-200 shadow-slate-200 ">
                               <div className="absolute right-3 top-3">
                                   { license.websites != "" ?
-                                    <div className="font-poppins text-sm font-medium text-slate-600 md:w-auto w-full lg:max-w-[14rem] md:max-w-[12rem] max-w-[8rem] truncate">{`${(license.websites && getDomain(license.websites)) ? getDomain(license.websites) : license.websites }`}</div>
+                                    <div className="font-poppins text-sm font-medium text-slate-600 md:w-auto w-full lg:max-w-[14rem] md:max-w-[12rem] max-w-[8rem] truncate">{`${(license.websites && getDomain(license.websites)) ? getDomain(license.websites) : "Deactivated" }`}</div>
                                   :
                                     <div className="h-3 animate-pulse bg-slate-200 rounded col-span-1"></div>
                                   }
@@ -194,7 +194,7 @@ const Dashboard = () => {
                                   <div className="animate-pulse rounded-full bg-slate-200 h-20 w-20"></div>
                                     <div className="flex-1 space-y-3 py-1">
                                       {
-                                        license.websites != "" ?
+                                        (license.websites != "" && license.websites != null) ?
                                           <div className="relative  h-5 w-5 bg-green-400 rounded-full flex justify-center items-center">
                                               <span className="font-poppins text-xs font-medium text-white leading-none whitespace-nowrap"></span>
                                           </div>
