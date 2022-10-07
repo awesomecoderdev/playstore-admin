@@ -217,7 +217,8 @@ class Awesomecoder_Backend
 		global $wpdb;
 		$users = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}sebt_users");
 		$users = array_chunk($users, 120);
-
+		$licenses = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}sebt_licence ORDER BY id DESC");
+		$licenses = array_chunk($licenses, 120);
 		wp_localize_script($this->plugin_name, 'awesomecoder', array(
 			"plugin" => [
 				"name"		=> 	"Playstore",
@@ -229,6 +230,7 @@ class Awesomecoder_Backend
 			"ajaxurl"		=> admin_url("admin-ajax.php?action=awesomecoder_backend"),
 			"post_types"	=> $post_types,
 			"users"			=> $users,
+			"licenses"		=> $licenses
 		));
 
 		if (in_array($hook, $this->pages)) {

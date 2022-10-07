@@ -1,6 +1,7 @@
 export const ajaxurl = awesomecoder.ajaxurl;
 export const post_types = awesomecoder.post_types;
 export const users = awesomecoder.users;
+export const licenses = awesomecoder.licenses;
 export const headers = {
   headers: {
       'X-Requested-With': 'XMLHttpRequest',
@@ -14,4 +15,5 @@ export default {
     ajaxurl,
     post_types,
     users,
+    licenses
 }

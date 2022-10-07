@@ -41,7 +41,7 @@ class Awesomecoder_Activator
 			$create_licance = "CREATE TABLE `{$wpdb->prefix}sebt_licence` (
 				`id` int(11) NOT NULL AUTO_INCREMENT,
 				`key` text NOT NULL,
-				`websites` text NOT NULL DEFAULT '[]',
+				`websites` text DEFAULT NULL',
 				PRIMARY KEY (`id`)
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 			dbDelta($create_licance);
