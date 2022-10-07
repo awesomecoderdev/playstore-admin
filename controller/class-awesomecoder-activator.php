@@ -42,6 +42,7 @@ class Awesomecoder_Activator
 				`id` int(11) NOT NULL AUTO_INCREMENT,
 				`key` text UNIQUE,
 				`websites` text DEFAULT NULL,
+				`expired` timestamp NULL DEFAULT NULL,
 				PRIMARY KEY (`id`)
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 			dbDelta($create_licance);
