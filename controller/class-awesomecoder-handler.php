@@ -132,34 +132,23 @@ class Awesomecoder_Handler
 	public static function backend_ajax_handler()
 	{
 		$path = isset($_REQUEST["path"]) ? strtolower($_REQUEST["path"]) : "err";
+		global $wpdb;
 
-		if ($path == "posts") {
-			$output = [];
-			$post_types = array_diff(get_post_types(), self::$post_types);
-
-			$args = array(
-				'post_type'   => $post_types,
-				'post_status' => 'published',
-				'posts_per_page' => -1
+		if ($path == "license") {
+			$db = "{$wpdb->prefix}sebt_licence";
+			$key = self::generateLicenseKey();
+			$wpdb->insert(
+				$db,
+				["key" => $key,]
 			);
-			$posts = new WP_Query($args);
 
-			if ($posts->have_posts()) {
-				while ($posts->have_posts()) : $posts->the_post();
-					$output[] = [
-						"id" => get_the_ID(),
-						"title" => get_the_title(),
-						"url" => get_the_permalink(),
-						"post_type" => get_post_type(),
-						"content" => get_the_content(),
-						"thumb" => get_the_post_thumbnail_url(),
-					];
-				endwhile;
-			}
+			$licenses = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}sebt_licence ORDER BY id DESC");
+			$licenses = array_chunk($licenses, 120);
 
 			echo json_encode([
 				"success" => true,
-				"posts" => $output,
+				"key" => $key,
+				"licenses" => $licenses
 			]);
 		} else {
 			echo json_encode([
@@ -170,6 +159,24 @@ class Awesomecoder_Handler
 
 		// end ajax
 		wp_die();
+	}
+
+
+	/**
+	 *  It is the shortcode functions of the template
+	 *
+	 * It will reutn the search box on a page
+	 *
+	 */
+	public static function generateLicenseKey($length = 50)
+	{
+		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$charactersLength = strlen($characters);
+		$randomString = '';
+		for ($i = 0; $i < $length; $i++) {
+			$randomString .= $characters[rand(0, $charactersLength - 1)];
+		}
+		return str_replace("=", $characters[rand(0, $charactersLength - 1)], $randomString . base64_encode(time() . date("d M Y H:i:s'.")));
 	}
 
 

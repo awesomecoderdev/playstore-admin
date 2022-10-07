@@ -1,6 +1,6 @@
 import React, { useEffect, Fragment, useState, useRef } from 'react';
-import { ClipboardDocumentCheckIcon, ClipboardDocumentIcon, Cog6ToothIcon, KeyIcon, PaintBrushIcon, Squares2X2Icon } from '@heroicons/react/24/outline';
-import { Listbox, Transition } from '@headlessui/react'
+import { ArrowPathRoundedSquareIcon, ChevronDownIcon, ClipboardDocumentCheckIcon, ClipboardDocumentIcon, Cog6ToothIcon, KeyIcon, PaintBrushIcon, Squares2X2Icon } from '@heroicons/react/24/outline';
+import { Listbox,Popover, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { post_types,users, ajaxurl, headers, licenses } from './Backend';
 import axios from 'axios';
@@ -11,6 +11,8 @@ const Dashboard = () => {
     const [paged, setPaged] = useState(0);
     const [licensePaged, setLicensePaged] = useState(0);
     const [tab, setTab] = useState(true);
+    const [loading, setLoading] = useState(false);
+    const [licensesKeys, setLicensesKeys] = useState(licenses);
 
     const getDomain = (href) => {
       if(href){
@@ -45,8 +47,8 @@ const Dashboard = () => {
                       onClick={(e) => {
                         setTab(true)
                       }}
-                      className={`${tab && "opacity-70 pointer-events-none"} mr-2 bg-white cursor-pointer flex items-center p-2 rounded-md border border-slate-400/25 transform translate-y-0 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 shadow-slate-200`}>
-                        <Squares2X2Icon className="h-5 pointer-events-none text-slate-500 mr-2"/>SEBT Users
+                      className={`${tab && "opacity-90 pointer-events-none"} whitespace-nowrap w-auto mr-2 bg-white cursor-pointer flex items-center p-2 rounded-md border border-slate-400/25 transform translate-y-0 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 shadow-slate-200`}>
+                        <Squares2X2Icon className="h-5 pointer-events-none text-slate-500"/><span className="md:block hidden ml-2">Users List</span>
                     </span>
                     {/* <span className='mr-2 bg-white cursor-pointer flex items-center p-2 rounded-md border border-slate-400/25 transform translate-y-0 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 shadow-slate-200 '>
                         <PaintBrushIcon className="h-5 pointer-events-none text-slate-500 mr-2"/>Post Types
@@ -58,8 +60,31 @@ const Dashboard = () => {
                       onClick={(e) => {
                         setTab(false)
                       }}
-                      className={`${!tab && "opacity-70 pointer-events-none"} mr-2 bg-white cursor-pointer flex items-center p-2 rounded-md border border-slate-400/25 transform translate-y-0 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 shadow-slate-200`}>
-                        <KeyIcon className="h-5 pointer-events-none text-slate-500 mr-2"/>License
+                      className={`${!tab && "opacity-90 pointer-events-none"} whitespace-nowrap w-auto mr-2 bg-white cursor-pointer flex items-center p-2 rounded-md border border-slate-400/25 transform translate-y-0 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 shadow-slate-200`}>
+                        <KeyIcon className="h-5 pointer-events-none text-slate-500"/><span className="md:block hidden ml-2">License</span>
+                    </span>
+                    <span
+                        onClick={(e) => {
+                          setTab(false)
+                          setLoading(true);
+                          axios.post(ajaxurl, {
+                            path: "license"
+                          },headers)
+                          .then(function (response) {
+                            const res = response.data;
+                            setLicensesKeys(res.licenses);
+                            // console.log(res);
+                          })
+                          .catch(function (error) {
+                            setLoading(false);
+                          });
+
+                          setLoading(false);
+                        }}
+                        className={`whitespace-nowrap outline-none mr-2 bg-white cursor-pointer flex items-center p-2 rounded-md border border-slate-400/25 transform translate-y-0 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 shadow-slate-200 `}
+                      >
+                      <ArrowPathRoundedSquareIcon className={`${loading && "animate-spin"} h-5 pointer-events-none  text-slate-500 mr-2`}/>
+                      Generate Key
                     </span>
                 </div>
 
@@ -180,18 +205,18 @@ const Dashboard = () => {
           {!tab &&
               <Fragment>
                 <div className="relative p-4 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3">
-                  {licenses[licensePaged] && licenses[licensePaged].map(license => {
+                  {licensesKeys[licensePaged] && licensesKeys[licensePaged].map(license => {
                       return(
                           <div key={license.id}  className="relative bg-white border border-slate-400/25 rounded-md p-3 w-full mx-auto cursor-pointer hover:shadow-lg transition-all duration-200 shadow-slate-200 ">
                               <div className="absolute right-3 top-3">
                                   { license.websites != "" ?
-                                    <div className="font-poppins text-sm font-medium text-slate-600 md:w-auto w-full lg:max-w-[14rem] md:max-w-[12rem] max-w-[8rem] truncate">{`${(license.websites && getDomain(license.websites)) ? getDomain(license.websites) : "Deactivated" }`}</div>
+                                    <div className="font-poppins text-sm font-medium text-slate-600 md:w-auto w-full lg:max-w-[14rem] md:max-w-[12rem] max-w-[8rem] truncate">{`${(license.websites && getDomain(license.websites)) ? getDomain(license.websites) : "" }`}</div>
                                   :
                                     <div className="h-3 animate-pulse bg-slate-200 rounded col-span-1"></div>
                                   }
                               </div>
                               <div className=" flex space-x-4">
-                                  <div className="animate-pulse rounded-full bg-slate-200 h-20 w-20"></div>
+                                  <div className="animate-pulse rounded-full flex justify-center items-center bg-slate-200 h-20 w-20 text-sm font-semibold">{license.id}</div>
                                     <div className="flex-1 space-y-3 py-1">
                                       {
                                         (license.websites != "" && license.websites != null) ?
