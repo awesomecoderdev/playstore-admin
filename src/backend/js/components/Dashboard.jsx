@@ -4,6 +4,7 @@ import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { post_types,users, ajaxurl, headers } from './Backend';
 import axios from 'axios';
+import Nav from './Nav';
 
 const Dashboard = () => {
     const [enabled, setEnabled] = useState(false);
@@ -21,23 +22,8 @@ const Dashboard = () => {
     return (
         <>
             {/* menu::start */}
-            <div className="relative bg-white w-full flex items-center md:justify-between justify-start md:flex-row flex-col px-5 py-3">
-                <div className="relative flex w-full md:mb-0 mb-2">
-                    <span className='mr-2 bg-white cursor-pointer flex items-center p-2 rounded-md border border-slate-400/25 transform translate-y-0 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 shadow-slate-200 '>
-                        <Squares2X2Icon className="h-5 pointer-events-none text-slate-500 mr-2"/>Dashboard
-                    </span>
-                    {/* <span className='mr-2 bg-white cursor-pointer flex items-center p-2 rounded-md border border-slate-400/25 transform translate-y-0 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 shadow-slate-200 '>
-                        <PaintBrushIcon className="h-5 pointer-events-none text-slate-500 mr-2"/>Post Types
-                    </span>
-                    <span className='mr-2 bg-white cursor-pointer flex items-center p-2 rounded-md border border-slate-400/25 transform translate-y-0 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 shadow-slate-200 '>
-                        <Cog6ToothIcon className="h-5 pointer-events-none text-slate-500 mr-2"/>Settings
-                    </span> */}
-                    <span className='mr-2 bg-white cursor-pointer flex items-center p-2 rounded-md border border-slate-400/25 transform translate-y-0 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 shadow-slate-200 '>
-                        <KeyIcon className="h-5 pointer-events-none text-slate-500 mr-2"/>License
-                    </span>
-                </div>
-
-                <div className="relative w-72 z-10">
+            <Nav paged={paged} setPaged={setPaged}>
+            <div className="relative w-72 z-10">
                   <Listbox value={paged} onChange={setPaged}>
                     <div className="relative mt-1">
                       <Listbox.Button className="scale-[0.97] relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left border border-slate-400/25 focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
@@ -89,9 +75,7 @@ const Dashboard = () => {
                     </div>
                   </Listbox>
                 </div>
-
-
-            </div>
+            </Nav>
             {/* menu::end */}
 
             <div className="relative p-4 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3">
