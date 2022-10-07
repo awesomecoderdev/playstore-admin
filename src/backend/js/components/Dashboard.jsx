@@ -65,8 +65,8 @@ const Dashboard = () => {
                     </span>
                     <span
                         onClick={(e) => {
-                          setTab(false)
                           setLoading(true);
+                          setTab(false)
                           axios.post(ajaxurl, {
                             path: "license"
                           },headers)
@@ -74,12 +74,11 @@ const Dashboard = () => {
                             const res = response.data;
                             setLicensesKeys(res.licenses);
                             // console.log(res);
+                            setLoading(false);
                           })
                           .catch(function (error) {
                             setLoading(false);
                           });
-
-                          setLoading(false);
                         }}
                         className={`whitespace-nowrap outline-none mr-2 bg-white cursor-pointer flex items-center p-2 rounded-md border border-slate-400/25 transform translate-y-0 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 shadow-slate-200 `}
                       >
@@ -159,11 +158,8 @@ const Dashboard = () => {
                                   }
                               </div>
                               <div className=" flex space-x-4">
-                                  {user.thumb ?
-                                      <img className="rounded-full shadow drop-shadow shadow-slate-200 bg-slate-200 h-20 w-20" src={user.thumb} alt={user.title} />
-                                  :
-                                      <div className="animate-pulse rounded-full bg-slate-200 h-20 w-20"></div>
-                                  }
+                                  <div className="animate-pulse rounded-full flex justify-center items-center bg-slate-200 h-20 w-20 text-sm font-semibold">{user.id}</div>
+
                                   <div className="flex-1 space-y-3 py-1">
                                       {(websites && getDomain(websites[0])) ?
                                           <div className="relative  h-5 w-5 bg-green-400 rounded-full flex justify-center items-center">

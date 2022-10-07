@@ -2744,17 +2744,18 @@ var Dashboard = function Dashboard() {
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("span", {
           onClick: function onClick(e) {
-            setTab(false);
             setLoading(true);
+            setTab(false);
             axios__WEBPACK_IMPORTED_MODULE_2___default().post(_Backend__WEBPACK_IMPORTED_MODULE_1__.ajaxurl, {
               path: "license"
             }, _Backend__WEBPACK_IMPORTED_MODULE_1__.headers).then(function (response) {
               var res = response.data;
               setLicensesKeys(res.licenses); // console.log(res);
+
+              setLoading(false);
             })["catch"](function (error) {
               setLoading(false);
             });
-            setLoading(false);
           },
           className: "whitespace-nowrap outline-none mr-2 bg-white cursor-pointer flex items-center p-2 rounded-md border border-slate-400/25 transform translate-y-0 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 shadow-slate-200 ",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_heroicons_react_24_outline__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -2833,12 +2834,9 @@ var Dashboard = function Dashboard() {
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
               className: " flex space-x-4",
-              children: [user.thumb ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-                className: "rounded-full shadow drop-shadow shadow-slate-200 bg-slate-200 h-20 w-20",
-                src: user.thumb,
-                alt: user.title
-              }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-                className: "animate-pulse rounded-full bg-slate-200 h-20 w-20"
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                className: "animate-pulse rounded-full flex justify-center items-center bg-slate-200 h-20 w-20 text-sm font-semibold",
+                children: user.id
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                 className: "flex-1 space-y-3 py-1",
                 children: [websites && getDomain(websites[0]) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {

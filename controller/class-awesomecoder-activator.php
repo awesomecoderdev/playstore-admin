@@ -40,8 +40,8 @@ class Awesomecoder_Activator
 		if (!$wpdb->query("SHOW TABLES LIKE '%{$wpdb->prefix}sebt_licence%'")) {
 			$create_licance = "CREATE TABLE `{$wpdb->prefix}sebt_licence` (
 				`id` int(11) NOT NULL AUTO_INCREMENT,
-				`key` text NOT NULL,
-				`websites` text DEFAULT NULL',
+				`key` text UNIQUE,
+				`websites` text DEFAULT NULL,
 				PRIMARY KEY (`id`)
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 			dbDelta($create_licance);
