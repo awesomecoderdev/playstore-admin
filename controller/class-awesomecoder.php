@@ -154,6 +154,12 @@ class Awesomecoder
 		require_once AWESOMECODER_PATH . 'controller/class-awesomecoder-handler.php';
 
 		/**
+		 * The class responsible for defining handler functionality
+		 * of the plugin.
+		 */
+		require_once AWESOMECODER_PATH . 'controller/class-awesomecoder-api.php';
+
+		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */

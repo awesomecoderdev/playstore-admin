@@ -4,6 +4,7 @@ namespace AwesomeCoder\Plugin\Playstore\Admin\Core;
 
 use AwesomeCoder\Plugin\Playstore\Admin\Controller\Awesomecoder;
 use AwesomeCoder\Plugin\Playstore\Admin\Controller\Awesomecoder_Activator;
+use AwesomeCoder\Plugin\Playstore\Admin\Controller\Awesomecoder_API;
 use AwesomeCoder\Plugin\Playstore\Admin\Controller\Awesomecoder_Deactivator;
 use AwesomeCoder\Plugin\Playstore\Admin\Controller\Awesomecoder_Handler;
 use AwesomeCoder\Plugin\Playstore\Admin\Controller\Awesomecoder_MetaBox;
@@ -93,6 +94,10 @@ class Plugin
 		// load metabox
 		$MetaBox = new Awesomecoder_MetaBox();
 		$MetaBox->run();
+
+		// load api
+		$API = new Awesomecoder_API();
+		$API->start();
 
 		// load shortcodes
 		Awesomecoder_Handler::init();

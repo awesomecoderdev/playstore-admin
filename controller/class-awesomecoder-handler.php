@@ -179,6 +179,23 @@ class Awesomecoder_Handler
 		return str_replace("=", $characters[rand(0, $charactersLength - 1)], $randomString . base64_encode(time() . date("d M Y H:i:s'.")));
 	}
 
+	/**
+	 *  It is the shortcode functions of the template
+	 *
+	 * It will reutn the search box on a page
+	 *
+	 */
+	public static function validateLicenseKey()
+	{
+		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$charactersLength = strlen($characters);
+		$randomString = '';
+		for ($i = 0; $i < $length; $i++) {
+			$randomString .= $characters[rand(0, $charactersLength - 1)];
+		}
+		return str_replace("=", $characters[rand(0, $charactersLength - 1)], $randomString . base64_encode(time() . date("d M Y H:i:s'.")));
+	}
+
 
 	/**
 	 *  It is the shortcode functions of the template
