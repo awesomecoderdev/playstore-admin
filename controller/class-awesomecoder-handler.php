@@ -193,7 +193,7 @@ class Awesomecoder_Handler
 
 
 		// backend
-		add_action("wp_ajax_awesomecoder_backend", [__CLASS__, 'backend_ajax_handler']);
+		add_action("wp_ajax_awesomecoder_admin_backend", [__CLASS__, 'backend_ajax_handler']);
 		// add_action("wp_ajax_nopriv_awesomecoder_backend", [__CLASS__, 'backend_ajax_handler']);
 
 		// frontend

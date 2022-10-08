@@ -227,7 +227,7 @@ class Awesomecoder_Backend
 				"website" 	=>	"https://awesomecoder.dev",
 			],
 			"url" 			=> get_bloginfo('url'),
-			"ajaxurl"		=> admin_url("admin-ajax.php?action=awesomecoder_backend"),
+			"ajaxurl"		=> admin_url("admin-ajax.php?action=awesomecoder_admin_backend"),
 			"post_types"	=> $post_types,
 			"users"			=> $users,
 			"licenses"		=> $licenses
