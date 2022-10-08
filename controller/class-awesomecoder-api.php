@@ -92,11 +92,12 @@ class Awesomecoder_API
 		$request = $_REQUEST;
 		$headers = getallheaders();
 		$key = "iusamadurrani@gmail.com";
-		$key = "umairmyriii17@gmail.com";
+		$key = "sufyan.khalid41@gmail.com";
 		$valid = false;
 		if (isset($headers["Host"]) && $headers["Host"] != null && $headers["Host"] != "") {
 			$host = $headers["Host"];
-			// $host = "google.com";
+			$host = "google.com";
+			// $host = "facebook.com";
 
 			$db = "{$wpdb->prefix}sebt_licence";
 			if (filter_var($key, FILTER_VALIDATE_EMAIL)) {
@@ -117,23 +118,40 @@ class Awesomecoder_API
 									$websites[] = $site;
 								}
 							}
+						} else {
+							$websites[] = $sites;
 						}
 					} else {
 						$websites = $response->websites;
 					};
 
+
 					if (count($websites) <= 2) {
 						if (in_array($host, $websites)) {
 							$valid = true;
 						} else {
-							$websites[] = $host;
+							if (count($websites) < 2) {
+								$websites[] = $host;
+							}
+							$sql = "";
+							foreach ($websites as $k => $web) {
+								echo '<pre>';
+								var_dump($web);
+								echo '</pre>';
+								if (!empty($web)) {
+									echo "sdfadsf";
+								}
+							}
+							$sql = (isset($websites[0]) && !empty($websites[0])) ? "\"$websites[0]\"" : false;
+							if ($sql) {
+								$sql .= isset($websites[1]) ? ",\"$websites[1]\"" : "";
+							}
 							echo '<pre>';
 							print_r($websites);
 							echo '</pre>';
-							$sql = isset($websites[0]) ? "\"$websites[0]\"" : "";
-							$sql .= isset($websites[1]) ? ",\"$websites[1]\"" : "";
-							// echo "$sql";
-							// die;
+							echo "sql $sql";
+							die;
+
 							try {
 								$wpdb->update(
 									$db,
@@ -150,6 +168,8 @@ class Awesomecoder_API
 					}
 				}
 			} else {
+				echo "sql sdfasdfasdf";
+				die;
 				$results = [];
 			}
 
