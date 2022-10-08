@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ajaxurl, awesomecoder, metaFields,states } from './Backend';
+import { ajaxurl, awesomecoder_admin, metaFields,states } from './Backend';
 import { RefreshIcon } from '@heroicons/react/outline';
 import axios from 'axios';
 import { bind } from 'lodash';

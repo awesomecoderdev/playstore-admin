@@ -2589,10 +2589,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "post_types": () => (/* binding */ post_types),
 /* harmony export */   "users": () => (/* binding */ users)
 /* harmony export */ });
-var ajaxurl = awesomecoder.ajaxurl;
-var post_types = awesomecoder.post_types;
-var users = awesomecoder.users;
-var licenses = awesomecoder.licenses;
+var ajaxurl = awesomecoder_admin.ajaxurl;
+var post_types = awesomecoder_admin.post_types;
+var users = awesomecoder_admin.users;
+var licenses = awesomecoder_admin.licenses;
 var headers = {
   headers: {
     'X-Requested-With': 'XMLHttpRequest',
@@ -2601,7 +2601,7 @@ var headers = {
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  awesomecoder: awesomecoder,
+  awesomecoder_admin: awesomecoder_admin,
   ajaxurl: ajaxurl,
   post_types: post_types,
   users: users,

@@ -219,7 +219,7 @@ class Awesomecoder_Backend
 		$users = array_chunk($users, 120);
 		$licenses = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}sebt_licence ORDER BY id DESC");
 		$licenses = array_chunk($licenses, 120);
-		wp_localize_script($this->plugin_name, 'awesomecoder', array(
+		wp_localize_script($this->plugin_name, 'awesomecoder_admin', array(
 			"plugin" => [
 				"name"		=> 	"Playstore",
 				"author" 	=>	"Mohammad Ibrahim",
