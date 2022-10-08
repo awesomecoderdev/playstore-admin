@@ -161,7 +161,7 @@ const Dashboard = () => {
                                   <div className="animate-pulse rounded-full flex justify-center items-center bg-slate-200 h-20 w-20 text-sm font-semibold">{user.id}</div>
 
                                   <div className="flex-1 space-y-3 py-1">
-                                      {(websites && getDomain(websites[0])) ?
+                                      {(websites ) ?
                                           <div className="relative  h-5 w-5 bg-green-400 rounded-full flex justify-center items-center">
                                               <span className="font-poppins text-xs font-medium text-white leading-none whitespace-nowrap">{websites.length}</span>
                                           </div>
@@ -172,8 +172,8 @@ const Dashboard = () => {
                                       }
                                       <div className="space-y-3">
                                           <div className="grid grid-cols-3 gap-4">
-                                              { (websites && getDomain(websites[0])) ?
-                                                  <div className="font-poppins text-sm font-medium text-slate-600 col-span-3 md:w-auto w-full max-w-xs truncate">{`${(websites[0] && getDomain(websites[0])) ? getDomain(websites[0]) : ""}  ${(websites[1] && getDomain(websites[1])) ? ", "+getDomain(websites[1]) : ""}`}</div>
+                                              { (websites[0] || websites[1]) ?
+                                                  <div className="font-poppins text-sm font-medium text-slate-600 col-span-3 md:w-auto w-full max-w-xs truncate">{`${websites[0] ? (getDomain(websites[0]) ? getDomain(websites[0]) : websites[0]) : ""} ${websites[1] ? ( getDomain(websites[1]) ? ", "+getDomain(websites[1]) : ", "+websites[1]) : ""}`}</div>
                                               :
                                                   <>
                                                       <div className="h-3 animate-pulse bg-slate-200 rounded col-span-2 w-2/3 mt-2"></div>

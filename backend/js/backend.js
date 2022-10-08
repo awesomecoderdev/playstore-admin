@@ -2839,7 +2839,7 @@ var Dashboard = function Dashboard() {
                 children: user.id
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                 className: "flex-1 space-y-3 py-1",
-                children: [websites && getDomain(websites[0]) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                children: [websites ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                   className: "relative  h-5 w-5 bg-green-400 rounded-full flex justify-center items-center",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
                     className: "font-poppins text-xs font-medium text-white leading-none whitespace-nowrap",
@@ -2855,9 +2855,9 @@ var Dashboard = function Dashboard() {
                   className: "space-y-3",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                     className: "grid grid-cols-3 gap-4",
-                    children: websites && getDomain(websites[0]) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                    children: websites[0] || websites[1] ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                       className: "font-poppins text-sm font-medium text-slate-600 col-span-3 md:w-auto w-full max-w-xs truncate",
-                      children: "".concat(websites[0] && getDomain(websites[0]) ? getDomain(websites[0]) : "", "  ").concat(websites[1] && getDomain(websites[1]) ? ", " + getDomain(websites[1]) : "")
+                      children: "".concat(websites[0] ? getDomain(websites[0]) ? getDomain(websites[0]) : websites[0] : "", " ").concat(websites[1] ? getDomain(websites[1]) ? ", " + getDomain(websites[1]) : ", " + websites[1] : "")
                     }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                         className: "h-3 animate-pulse bg-slate-200 rounded col-span-2 w-2/3 mt-2"
