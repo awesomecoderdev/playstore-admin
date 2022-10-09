@@ -89,19 +89,15 @@ class Awesomecoder_API
 	public function verify_licance_key()
 	{
 		global $wpdb;
-		$request = $_REQUEST;
 		$headers = getallheaders();
-		$key = "umairmyriii17@gmail.com";
-		if (isset($headers["Host"]) && $headers["Host"] != null && $headers["Host"] != "") {
+		if (isset($headers["Host"], $_REQUEST["key"]) && $headers["Host"] != null && $headers["Host"] != "") {
 			$host = $headers["Host"];
-			// $host = "https://google.com";
-			// $host = "facebook.com";
+			$key = $_REQUEST["key"];
 			$host = (strpos($host, "http://") !== false || strpos($host, "https://")  !== false) ? parse_url($host, PHP_URL_HOST) : $host;
 			$data = [
 				"success" => false,
 				"host" => $host,
 			];
-
 			$db = "{$wpdb->prefix}sebt_licence";
 			if (filter_var($key, FILTER_VALIDATE_EMAIL)) {
 				// for sebt email
@@ -203,6 +199,7 @@ class Awesomecoder_API
 			}
 		} else { // don't have host return false;
 			$data["success"] = false;
+			$data["msg"] = "Unauthorize access!";
 		}
 		return wp_send_json($data, 200);
 	}
