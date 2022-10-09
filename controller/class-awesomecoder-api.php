@@ -120,13 +120,19 @@ class Awesomecoder_API
 				// $data["res"] = $res;
 				// $data["num_rows"] = $wpdb->num_rows;
 				// $data["query"] = $query;
+				// $data["expired"] =  date('Y-m-d H:i:s', strtotime('+1 year'));
 				if ($wpdb->num_rows > 0 && $wpdb->num_rows == 1) {
 					$licance = current($res);
+					$expired = date("Y-m-d", strtotime($licance->expired));
+					$data["expired"] = $expired;
 					if (empty($licance->websites) || $licance->websites == null) {
 						try {
 							$update = $wpdb->update(
 								$db,
-								["websites" => $host],
+								[
+									"websites" => $host,
+									"expired" => date('Y-m-d H:i:s', strtotime('+1 year')),
+								],
 								["key" => $key]
 							);
 							if ($update) {
@@ -138,7 +144,12 @@ class Awesomecoder_API
 						}
 					} else { // process if website exist
 						if (isset($licance->websites) && $licance->websites == $host) {
-							$data["success"] = true;
+							$today = date("Y-m-d");
+							if ($today > $expired) {
+								$data["success"] = false;
+							} else {
+								$data["success"] = true;
+							}
 						}
 					}
 					$data["websites"] = $licance;
