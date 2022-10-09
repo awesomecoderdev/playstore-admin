@@ -91,119 +91,194 @@ class Awesomecoder_API
 		global $wpdb;
 		$request = $_REQUEST;
 		$headers = getallheaders();
-		$key = "iusamadurrani@gmail.com";
-		$key = "sufyan.khalid41@gmail.com";
-		$valid = false;
+		// $key = "iusamadurrani@gmail.com";
+		// $key = "sufyan.khalid41@gmail.com";
+		$key = "zjpbmoUWsiEyU6l6l8iaGuhLQg3C3t5QauOgldlYu4ksomIEuWMTY2NTI2NTIxNzA4IE9jdCAyMDIyIDIxOjQwOjE3Jy4Z";
+		// $key = "zjpbmoUWsiEyU6l6l8iaGuhLQg3C3t5QauOgldlYu4ksomIEuWMTY2NTI2NTIxNzA4IE9jdCAyMDIyIDIxOjQwOjE3Jy4Z5464";
 		if (isset($headers["Host"]) && $headers["Host"] != null && $headers["Host"] != "") {
 			$host = $headers["Host"];
-			$host = "google.com";
+			// $host = "https://google.com";
 			// $host = "facebook.com";
+			$host = (strpos($host, "http://") !== false || strpos($host, "https://")  !== false) ? parse_url($host, PHP_URL_HOST) : $host;
+
+			$data = [
+				"success" => false,
+				"request" => $request,
+				"host" => $host
+			];
 
 			$db = "{$wpdb->prefix}sebt_licence";
 			if (filter_var($key, FILTER_VALIDATE_EMAIL)) {
+				// for sebt email
+				$data["access"] = "email";
 				$db = "{$wpdb->prefix}sebt_users";
-				$results = $wpdb->get_results("SELECT * FROM $db WHERE `email`='$key'");
-				if ($wpdb->num_rows == 1) {
-					$response = current($results);
-					$websites = [];
-
-					if (!is_array($response->websites) && strpos($response->websites, "[") !== false) {
-						$sites = str_replace(["[", "]", "\""], "", $response->websites);
-						if (strpos($sites, ",") !== false) {
-							$sites = explode(",", $sites);
-							foreach ($sites as $i => $site) {
-								if (strpos($site, "http://") !== false || strpos($site, "https://")  !== false) {
-									$websites[] = parse_url($site, PHP_URL_HOST);
-								} else {
-									$websites[] = $site;
-								}
+				// $results = $wpdb->get_results("SELECT * FROM $db WHERE `email`='$key'");
+			} else { // for licance key -> done
+				$data["access"] = "licance";
+				$query = "SELECT * FROM $db WHERE `key`='$key'";
+				$res = $wpdb->get_results($query);
+				// $data["res"] = $res;
+				// $data["num_rows"] = $wpdb->num_rows;
+				// $data["query"] = $query;
+				if ($wpdb->num_rows > 0 && $wpdb->num_rows == 1) {
+					$licance = current($res);
+					if (empty($licance->websites) || $licance->websites == null) {
+						try {
+							$update = $wpdb->update(
+								$db,
+								["websites" => $host],
+								["key" => $key]
+							);
+							if ($update) {
+								$data["success"] = true;
 							}
-						} else {
-							$websites[] = $sites;
+						} catch (Exception $e) {
+							// continue
+							$data["success"] = false;
 						}
-					} else {
-						$websites = $response->websites;
-					};
-
-
-					if (count($websites) <= 2) {
-						if (in_array($host, $websites)) {
-							$valid = true;
-						} else {
-							if (count($websites) < 2) {
-								$websites[] = $host;
-							}
-							$sql = "";
-							foreach ($websites as $k => $web) {
-								echo '<pre>';
-								var_dump($web);
-								echo '</pre>';
-								if (!empty($web)) {
-									echo "sdfadsf";
-								}
-							}
-							$sql = (isset($websites[0]) && !empty($websites[0])) ? "\"$websites[0]\"" : false;
-							if ($sql) {
-								$sql .= isset($websites[1]) ? ",\"$websites[1]\"" : "";
-							}
-							echo '<pre>';
-							print_r($websites);
-							echo '</pre>';
-							echo "sql $sql";
-							die;
-
-							try {
-								$wpdb->update(
-									$db,
-									["websites" => "[$sql]"],
-									["email" => $key]
-								);
-							} catch (Exception $e) {
-								// continue
-							}
-							$valid = true;
+					} else { // process if website exist
+						if (isset($licance->websites) && $licance->websites == $host) {
+							$data["success"] = true;
 						}
-					} else {
-						$valid = false;
 					}
+					$data["websites"] = $licance;
+				} else {
+					// multiple licance or don't have licance
+					$data["success"] = false;
+					$data["isValid"] = "that can not process";
 				}
-			} else {
-				echo "sql sdfasdfasdf";
-				die;
-				$results = [];
 			}
-
-			// echo '<pre>';
-			// print_r($websites);
-			// echo '</pre>';
-			// die;
-
-			$data = [
-				"success" => $valid,
-				"msg" => $request,
-				"db" => $db,
-				"query" => $results,
-				"host" => $host
-			];
+		} else { // don't have host return false;
+			$data["success"] = false;
 		}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+		// $valid = false;
+		// if (isset($headers["Host"]) && $headers["Host"] != null && $headers["Host"] != "") {
+		// 	$host = $headers["Host"];
+		// 	$host = "google.com";
+		// 	// $host = "facebook.com";
+
+		// 	$db = "{$wpdb->prefix}sebt_licence";
+		// 	if (filter_var($key, FILTER_VALIDATE_EMAIL)) {
+		// 		$db = "{$wpdb->prefix}sebt_users";
+		// 		$results = $wpdb->get_results("SELECT * FROM $db WHERE `email`='$key'");
+		// 		if ($wpdb->num_rows == 1) {
+		// 			$response = current($results);
+		// 			$websites = [];
+
+		// 			if (!is_array($response->websites) && strpos($response->websites, "[") !== false) {
+		// 				$sites = str_replace(["[", "]", "\""], "", $response->websites);
+		// 				if (strpos($sites, ",") !== false) {
+		// 					$sites = explode(",", $sites);
+		// 					foreach ($sites as $i => $site) {
+		// 						if (strpos($site, "http://") !== false || strpos($site, "https://")  !== false) {
+		// 							$websites[] = parse_url($site, PHP_URL_HOST);
+		// 						} else {
+		// 							$websites[] = $site;
+		// 						}
+		// 					}
+		// 				} else {
+		// 					$websites[] = $sites;
+		// 				}
+		// 			} else {
+		// 				$websites = $response->websites;
+		// 			};
+
+
+		// 			if (count($websites) <= 2) {
+		// 				if (in_array($host, $websites)) {
+		// 					$valid = true;
+		// 				} else {
+		// 					if (count($websites) < 2) {
+		// 						$websites[] = $host;
+		// 					}
+		// 					$sql = "";
+		// 					foreach ($websites as $k => $web) {
+		// 						echo '<pre>';
+		// 						var_dump($web);
+		// 						echo '</pre>';
+		// 						if (!empty($web)) {
+		// 							echo "sdfadsf";
+		// 						}
+		// 					}
+		// 					$sql = (isset($websites[0]) && !empty($websites[0])) ? "\"$websites[0]\"" : false;
+		// 					if ($sql) {
+		// 						$sql .= isset($websites[1]) ? ",\"$websites[1]\"" : "";
+		// 					}
+		// 					echo '<pre>';
+		// 					print_r($websites);
+		// 					echo '</pre>';
+		// 					echo "sql $sql";
+		// 					die;
+
+		// 					try {
+		// 						$wpdb->update(
+		// 							$db,
+		// 							["websites" => "[$sql]"],
+		// 							["email" => $key]
+		// 						);
+		// 					} catch (Exception $e) {
+		// 						// continue
+		// 					}
+		// 					$valid = true;
+		// 				}
+		// 			} else {
+		// 				$valid = false;
+		// 			}
+		// 		}
+		// 	} else {
+		// 		echo "sql sdfasdfasdf";
+		// 		die;
+		// 		$results = [];
+		// 	}
+
+		// 	// echo '<pre>';
+		// 	// print_r($websites);
+		// 	// echo '</pre>';
+		// 	// die;
+
+		// 	$data = [
+		// 		"success" => $valid,
+		// 		"msg" => $request,
+		// 		"db" => $db,
+		// 		"query" => $results,
+		// 		"host" => $host
+		// 	];
+		// }else{
+
+		// }
+
+
 		// if (isset($request["key"]) && $request["key"] != null) {
-		// 	// $key = $request["key"];
-		// 	$key = "iusamadurrani@gmail.com";
+		// 	$key = $request["key"];
+		// 	// $key = "iusamadurrani@gmail.com";
 		// 	$valid = false;
 		// 	$db = "{$wpdb->prefix}sebt_licence";
 		// 	if (filter_var($key, FILTER_VALIDATE_EMAIL)) {
 		// 		$db = "{$wpdb->prefix}sebt_users";
 		// 		$results = $wpdb->get_results("SELECT * FROM $db WHERE 'email'=$key");
-		// 		echo '<pre>';
-		// 		print_r($results);
-		// 		echo '</pre>';
-		// 		die;
+		// 		// echo '<pre>';
+		// 		// print_r($results);
+		// 		// echo '</pre>';
+		// 		// die;
 		// 	} else {
 		// 		$results = [];
 		// 	}
 
+		// 	$valid = $key == "ibrahimk";
 		// 	$data = [
 		// 		"success" => $valid,
 		// 		"msg" => $request,

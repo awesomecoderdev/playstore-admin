@@ -224,6 +224,11 @@ const Dashboard = () => {
                                             <span className="font-poppins text-xs font-medium text-white leading-none whitespace-nowrap"></span>
                                         </div>
                                       }
+                                      <div className="absolute right-3 top-0">
+                                        <div className="font-poppins text-sm font-medium text-slate-600 md:w-auto w-full lg:max-w-[14rem] md:max-w-[12rem] max-w-[8rem] truncate">
+                                          {license.websites ? (getDomain(license.websites) ? getDomain(license.websites) : license.websites) : ""}
+                                        </div>
+                                      </div>
                                       <div className="space-y-3">
                                           <div className="grid grid-cols-3 gap-4">
                                               { license.key ?
