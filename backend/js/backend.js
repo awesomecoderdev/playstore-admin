@@ -2822,6 +2822,10 @@ var Dashboard = function Dashboard() {
         className: "relative p-4 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3",
         children: _Backend__WEBPACK_IMPORTED_MODULE_1__.users[paged] && _Backend__WEBPACK_IMPORTED_MODULE_1__.users[paged].map(function (user) {
           var websites = user.websites ? JSON.parse(user.websites) : [];
+          console.log('====================================');
+          console.log("".concat(user.id, " "), websites);
+          console.log("".concat(user.id, " "), websites.length);
+          console.log('====================================');
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
             className: "relative bg-white border border-slate-400/25 rounded-md p-3 w-full mx-auto cursor-pointer hover:shadow-lg transition-all duration-200 shadow-slate-200 ",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
@@ -2843,7 +2847,7 @@ var Dashboard = function Dashboard() {
                   className: "relative  h-5 w-5 bg-green-400 rounded-full flex justify-center items-center",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
                     className: "font-poppins text-xs font-medium text-white leading-none whitespace-nowrap",
-                    children: websites.length
+                    children: Object.keys(websites).length
                   })
                 }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                   className: "relative  h-5 w-5 bg-green-400 rounded-full flex justify-center items-center",
@@ -2855,9 +2859,11 @@ var Dashboard = function Dashboard() {
                   className: "space-y-3",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                     className: "grid grid-cols-3 gap-4",
-                    children: websites[0] || websites[1] ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                    children: websites ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                       className: "font-poppins text-sm font-medium text-slate-600 col-span-3 md:w-auto w-full max-w-xs truncate",
-                      children: "".concat(websites[0] ? getDomain(websites[0]) ? getDomain(websites[0]) : websites[0] : "", " ").concat(websites[1] ? getDomain(websites[1]) ? ", " + getDomain(websites[1]) : ", " + websites[1] : "")
+                      children: Object.keys(websites).map(function (host, i) {
+                        return Object.keys(websites).length == i + 1 ? "".concat(host) : "".concat(host, ", ");
+                      })
                     }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                         className: "h-3 animate-pulse bg-slate-200 rounded col-span-2 w-2/3 mt-2"

@@ -148,6 +148,10 @@ const Dashboard = () => {
                 <div className="relative p-4 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3">
                   {users[paged] && users[paged].map(user => {
                       const websites = user.websites ? JSON.parse(user.websites) : [];
+                      console.log('====================================');
+                      console.log(`${user.id} `,websites);
+                      console.log(`${user.id} `,websites.length);
+                      console.log('====================================');
                       return(
                           <div key={user.id}  className="relative bg-white border border-slate-400/25 rounded-md p-3 w-full mx-auto cursor-pointer hover:shadow-lg transition-all duration-200 shadow-slate-200 ">
                               <div className="absolute right-3 top-3">
@@ -163,7 +167,7 @@ const Dashboard = () => {
                                   <div className="flex-1 space-y-3 py-1">
                                       {(websites ) ?
                                           <div className="relative  h-5 w-5 bg-green-400 rounded-full flex justify-center items-center">
-                                              <span className="font-poppins text-xs font-medium text-white leading-none whitespace-nowrap">{websites.length}</span>
+                                              <span className="font-poppins text-xs font-medium text-white leading-none whitespace-nowrap">{Object.keys(websites).length}</span>
                                           </div>
                                       :
                                           <div className="relative  h-5 w-5 bg-green-400 rounded-full flex justify-center items-center">
@@ -172,8 +176,12 @@ const Dashboard = () => {
                                       }
                                       <div className="space-y-3">
                                           <div className="grid grid-cols-3 gap-4">
-                                              { (websites[0] || websites[1]) ?
-                                                  <div className="font-poppins text-sm font-medium text-slate-600 col-span-3 md:w-auto w-full max-w-xs truncate">{`${websites[0] ? (getDomain(websites[0]) ? getDomain(websites[0]) : websites[0]) : ""} ${websites[1] ? ( getDomain(websites[1]) ? ", "+getDomain(websites[1]) : ", "+websites[1]) : ""}`}</div>
+                                              { websites ?
+                                                  <div className="font-poppins text-sm font-medium text-slate-600 col-span-3 md:w-auto w-full max-w-xs truncate">
+                                                    {Object.keys(websites).map((host,i)=>{
+                                                      return (Object.keys(websites).length == (i+1)) ? `${host}` : `${host}, `;
+                                                    })}
+                                                  </div>
                                               :
                                                   <>
                                                       <div className="h-3 animate-pulse bg-slate-200 rounded col-span-2 w-2/3 mt-2"></div>
