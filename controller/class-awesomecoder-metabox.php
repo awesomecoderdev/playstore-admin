@@ -245,6 +245,7 @@ class Awesomecoder_MetaBox
                     }
                 }
             }
+
             return $shipping;
         }, 10, 2);
     }
