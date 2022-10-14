@@ -635,6 +635,17 @@ input[type=checkbox]:focus, input[type=color]:focus, input[type=date]:focus, inp
         box-shadow: 0 0 0 1px #2271b1;
         outline: 2px solid transparent;
     }
+.sr-only{
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
 .pointer-events-none{
   pointer-events: none;
 }
@@ -720,8 +731,14 @@ input[type=checkbox]:focus, input[type=color]:focus, input[type=date]:focus, inp
 .block{
   display: block;
 }
+.inline-block{
+  display: inline-block;
+}
 .flex{
   display: flex;
+}
+.inline-flex{
+  display: inline-flex;
 }
 .table{
   display: table;
@@ -747,11 +764,23 @@ input[type=checkbox]:focus, input[type=color]:focus, input[type=date]:focus, inp
 .h-6{
   height: 1.5rem;
 }
+.h-4{
+  height: 1rem;
+}
 .max-h-60{
   max-height: 15rem;
 }
 .min-h-\[12rem\]{
   min-height: 12rem;
+}
+.min-h-\[4rem\]{
+  min-height: 4rem;
+}
+.min-h-\[2rem\]{
+  min-height: 2rem;
+}
+.min-h-\[2\.5rem\]{
+  min-height: 2.5rem;
 }
 .w-full{
   width: 100%;
@@ -788,6 +817,12 @@ input[type=checkbox]:focus, input[type=color]:focus, input[type=date]:focus, inp
 .w-6{
   width: 1.5rem;
 }
+.w-11{
+  width: 2.75rem;
+}
+.w-4{
+  width: 1rem;
+}
 .min-w-\[10rem\]{
   min-width: 10rem;
 }
@@ -811,6 +846,14 @@ input[type=checkbox]:focus, input[type=color]:focus, input[type=date]:focus, inp
 }
 .translate-y-0{
   --tw-translate-y: 0px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.translate-x-6{
+  --tw-translate-x: 1.5rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.translate-x-1{
+  --tw-translate-x: 0.25rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 .scale-\[0\.97\]{
@@ -1001,6 +1044,22 @@ input[type=checkbox]:focus, input[type=color]:focus, input[type=date]:focus, inp
   --tw-bg-opacity: 1;
   background-color: rgb(248 113 113 / var(--tw-bg-opacity));
 }
+.bg-blue-600{
+  --tw-bg-opacity: 1;
+  background-color: rgb(37 99 235 / var(--tw-bg-opacity));
+}
+.bg-gray-200{
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
+.bg-gray-500{
+  --tw-bg-opacity: 1;
+  background-color: rgb(107 114 128 / var(--tw-bg-opacity));
+}
+.bg-gray-100{
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
 .bg-contain{
   background-size: contain;
 }
@@ -1015,6 +1074,9 @@ input[type=checkbox]:focus, input[type=color]:focus, input[type=date]:focus, inp
 }
 .p-3{
   padding: 0.75rem;
+}
+.p-0{
+  padding: 0px;
 }
 .px-2{
   padding-left: 0.5rem;

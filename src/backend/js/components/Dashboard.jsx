@@ -63,7 +63,7 @@ const Dashboard = () => {
                       className={`${!tab && "opacity-90 pointer-events-none"} whitespace-nowrap w-auto mr-2 bg-white cursor-pointer flex items-center p-2 rounded-md border border-slate-400/25 transform translate-y-0 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 shadow-slate-200`}>
                         <KeyIcon className="h-5 pointer-events-none text-slate-500"/><span className="md:block hidden ml-2">License</span>
                     </span>
-                    <span
+                    {/* <span
                         onClick={(e) => {
                           setLoading(true);
                           setTab(false)
@@ -84,7 +84,7 @@ const Dashboard = () => {
                       >
                       <ArrowPathRoundedSquareIcon className={`${loading && "animate-spin"} h-5 pointer-events-none  text-slate-500 mr-2`}/>
                       Generate Key
-                    </span>
+                    </span> */}
                 </div>
 
                 <div className={`relative w-72 z-10 ${!tab && "opacity-50 pointer-events-none"}`}>

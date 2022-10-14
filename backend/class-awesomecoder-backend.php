@@ -187,7 +187,7 @@ class Awesomecoder_Backend
 
 		// metabox css
 		if (in_array($hook, $this->metabox)) {
-			// wp_enqueue_style("{$this->plugin_name}-metabox", AWESOMECODER_URL . 'backend/css/metabox.css', array(), filemtime(AWESOMECODER_PATH . "backend/css/metabox.css"), 'all');
+			wp_enqueue_style("{$this->plugin_name}-metabox", AWESOMECODER_URL . 'backend/css/metabox.css', array(), (filemtime(AWESOMECODER_PATH . "backend/css/metabox.css") ? filemtime(AWESOMECODER_PATH . "backend/css/metabox.css") : $this->version), 'all');
 		}
 	}
 
@@ -211,7 +211,7 @@ class Awesomecoder_Backend
 		 * class.
 		 */
 
-		wp_enqueue_script("{$this->plugin_name}", AWESOMECODER_URL . 'backend/js/awesomecoder-init.js', array('jquery'), (filemtime(AWESOMECODER_PATH . "backend/js/awesomecoder-init.js") ?? $this->version), false);
+		wp_enqueue_script("{$this->plugin_name}", AWESOMECODER_URL . 'backend/js/awesomecoder-init.js', array('jquery'), (filemtime(AWESOMECODER_PATH . "backend/js/awesomecoder-init.js") ? filemtime(AWESOMECODER_PATH . "backend/js/awesomecoder-init.js") : $this->version), false);
 		// Some local vairable to get ajax url
 		$post_types = array_diff(get_post_types(), $this->post_types);
 		global $wpdb;
@@ -239,7 +239,7 @@ class Awesomecoder_Backend
 
 		// metabox css
 		if (in_array($hook, $this->metabox)) {
-			// wp_enqueue_script("{$this->plugin_name}-metabox", AWESOMECODER_URL . 'backend/js/metabox.js', array('jquery'), (filemtime(AWESOMECODER_PATH . "backend/js/metabox.js") ?? $this->version), true);
+			wp_enqueue_script("{$this->plugin_name}-metabox", AWESOMECODER_URL . 'backend/js/metabox.js', array('jquery'), (filemtime(AWESOMECODER_PATH . "backend/js/metabox.js") ? filemtime(AWESOMECODER_PATH . "backend/js/metabox.js") : $this->version), true);
 		}
 	}
 }

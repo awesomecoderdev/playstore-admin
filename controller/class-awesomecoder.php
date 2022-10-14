@@ -139,12 +139,6 @@ class Awesomecoder
 		 * The class responsible for defining metabox functionality
 		 * of the plugin.
 		 */
-		require_once AWESOMECODER_PATH . 'controller/class-awesomecoder-shortcode.php';
-
-		/**
-		 * The class responsible for defining metabox functionality
-		 * of the plugin.
-		 */
 		require_once AWESOMECODER_PATH . 'controller/class-awesomecoder-metabox.php';
 
 		/**

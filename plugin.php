@@ -8,7 +8,6 @@ use AwesomeCoder\Plugin\Playstore\Admin\Controller\Awesomecoder_API;
 use AwesomeCoder\Plugin\Playstore\Admin\Controller\Awesomecoder_Deactivator;
 use AwesomeCoder\Plugin\Playstore\Admin\Controller\Awesomecoder_Handler;
 use AwesomeCoder\Plugin\Playstore\Admin\Controller\Awesomecoder_MetaBox;
-use AwesomeCoder\Plugin\Playstore\Admin\Controller\Awesomecoder_Shortcode;
 
 /**
  * Load core of the plugin.
@@ -87,9 +86,6 @@ class Plugin
 	{
 		$instance = new Awesomecoder();
 		$instance->run();
-
-		// load shortcodes
-		Awesomecoder_Shortcode::run();
 
 		// load metabox
 		$MetaBox = new Awesomecoder_MetaBox();
