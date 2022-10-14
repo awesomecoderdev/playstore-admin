@@ -2,6 +2,8 @@
 
 namespace AwesomeCoder\Plugin\Playstore\Admin\Controller;
 
+use Exception;
+
 /**
  * The core plugin class.
  *
@@ -189,20 +191,7 @@ class Awesomecoder_MetaBox
             global $wpdb;
             $product_lists = [];
             $order_id  = $order->get_id(); // Get the order ID
-            $parent_id = $order->get_parent_id(); // Get the parent order ID (for subscriptions…)
             $db = "{$wpdb->prefix}sebt_licence";
-
-            $user_id   = $order->get_user_id(); // Get the costumer ID
-            $user      = $order->get_user(); // Get the WP_User object
-
-            $order_status  = $order->get_status(); // Get the order status (see the conditional method has_status() below)
-            $currency      = $order->get_currency(); // Get the currency used
-            $payment_method = $order->get_payment_method(); // Get the payment method ID
-            $payment_title = $order->get_payment_method_title(); // Get the payment method title
-            $date_created  = $order->get_date_created(); // Get date created (WC_DateTime object)
-            $date_modified = $order->get_date_modified(); // Get date modified (WC_DateTime object)
-
-            $billing_country = $order->get_billing_country(); // Customer billing country
             $licance_keys = [];
             $awesomecoderLicenceProductId = get_option("awesomecoderLicenceProductId", null);
 
@@ -227,29 +216,35 @@ class Awesomecoder_MetaBox
             if (get_post_meta($order_id, "awesomecoderOrderLicenceProduct", true) && $order->get_status() == "completed") {
                 // update_post_meta($order_id, "awesomecoderOrderLicenceProduct", $licance_keys);
                 $get_licence_keys = get_post_meta($order_id, "awesomecoderOrderLicenceProduct", true);
-                // echo "adfaf a $order_id";
-                // echo "<pre>" . json_encode($get_licence_keys);
-                // print_r($get_licence_keys);
-                // echo '</pre>';
-
-                // foreach ($get_licence_keys as $i => $key) {
-                //     // $key = self::generateLicenseKey();
-                //     // $wpdb->insert(
-                //     //     $db,
-                //     //     ["key" => $key,]
-                //     // );
-
-                //     // $licenses = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}sebt_licence ORDER BY id DESC");
-                //     // $licenses = array_chunk($licenses, 120);
-                // }
-
-                echo '<pre>';
-                print_r($get_licence_keys);
-                echo '</pre>';
+                if (!get_post_meta($order_id, "awesomecoderOrderLicenceProductUsed", true)) {
+                    try {
+                        foreach ($get_licence_keys as $i => $key) {
+                            $wpdb->insert(
+                                $db,
+                                ["key" => $key,]
+                            );
+                        }
+                        update_post_meta($order_id, "awesomecoderOrderLicenceProductUsed", "used");
+                    } catch (Exception $e) {
+                        delete_post_meta($order_id, "awesomecoderOrderLicenceProductUsed", "used");
+                    }
+                }
+                $co = 1;
+                foreach ($get_licence_keys as $i => $key) {
+                    echo '<tr class="woocommerce-table__line-item order_item"><td class="woocommerce-table__product-name product-name"> Licance Key ' . $co . '</td>';
+                    echo '<td class="woocommerce-table__product-total product-total"><span>' . $key . '</span></td></tr>';
+                    $co++;
+                }
             } else {
-                update_post_meta($order_id, "awesomecoderOrderLicenceProduct", $licance_keys);
+                if (update_post_meta($order_id, "awesomecoderOrderLicenceProduct", $licance_keys)) {
+                    $co = 1;
+                    foreach ($licance_keys as $i => $key) {
+                        echo '<tr class="woocommerce-table__line-item order_item"><td class="woocommerce-table__product-name product-name"> Licance Key ' . $co . '</td>';
+                        echo '<td class="woocommerce-table__product-total product-total"><span>..................................................................................................</span></td></tr>';
+                        $co++;
+                    }
+                }
             }
-
             return $shipping;
         }, 10, 2);
     }
